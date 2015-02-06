@@ -1,3 +1,10 @@
+body {
+    font-family: "Hoefler Text", "Times New Roman", Georgia, serif;
+    font-size: 18px;
+    line-height: 23px;
+    padding: 2em 3em;
+}
+
 span.sparkline {
     display: inline-block;
     width: 5em;

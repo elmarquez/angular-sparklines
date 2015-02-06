@@ -6,6 +6,8 @@
   <meta name="viewport" content="initial-scale=1,width=device-width">
   <title>angular-sparklines</title>
   <!-- STYLES -->
+  <% _.forEach(fonts, function(url) { %><link rel="stylesheet" type="text/css" href="<%= url %>"/>
+  <% }); %>
   <% _.forEach(css, function(url) { %><link rel="stylesheet" type="text/css" href="<%= url %>"/>
   <% }); %>
   <!-- SCRIPTS -->
@@ -24,46 +26,67 @@
   <div class="container" ng-controller="ExampleCtrl">
 
     <div class="row">
-      <div class="col-lg-12">
-        <h1>Tests for angular-sparklines module</h1>
+      <div class="col-lg-5">
+        <h1>Angular Sparklines</h1>
+        <p>
+          Sparklines are ...
+          Four basic chart types are available: line, bar, area, and heat map.
+          Reference to Tufte, other people's implementations.
+        </p>
+        <p>
+            <code>&lt;sparkline data="{{ data }}" options="{{ options }}"&gt;&lt;/sparkline&gt;</code>
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          vulputate purus non bibendum pharetra. Vestibulum ante ipsum primis
+          in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur
+          facilisis, est at ultricies ornare, nunc orci auctor mi, id auctor
+          nunc ipsum sed purus. Cras sollicitudin ante non elit vehicula, eu
+          ultricies magna condimentum. Ut mi tellus, fermentum quis mauris
+          eget, hendrerit eleifend urna. Nam facilisis, justo et ultricies
+          auctor, urna quam iaculis tortor, sed luctus libero erat vel sapien.
+          Ut sed sem vitae nulla scelerisque finibus non ut dui. Suspendisse
+          ullamcorper ultrices lorem nec vestibulum. Etiam quis interdum
+          velit. Maecenas imperdiet dictum nisl, venenatis vehicula ante
+          efficitur dapibus. Proin sed justo mi. Mauris lacinia hendrerit
+          sapien, ut dictum nisl rhoncus in. Proin libero turpis, posuere ut
+          tristique eu, luctus quis tellus. Nulla nec accumsan ex, non
+          scelerisque metus.
+        </p>
+        <p>
+          Mauris vitae feugiat nibh. Integer at tellus enim. Cras hendrerit a
+          arcu venenatis vestibulum. Sed cursus, est a dapibus malesuada, dolor
+          nunc consequat velit, et pharetra augue ex sed magna. Morbi suscipit
+          sit amet metus a mattis. Donec auctor lorem dui, ut interdum tellus
+          mollis a. Aenean sodales eros magna, a cursus leo pulvinar et. Nullam
+          in metus luctus, feugiat nulla ac, feugiat arcu. Nullam tincidunt
+          placerat nisi, quis tincidunt eros tincidunt quis. Curabitur
+          fermentum mattis porttitor. Nam tristique diam finibus nibh congue,
+          id sollicitudin urna blandit. Donec ante felis, hendrerit ac
+          vulputate nec, suscipit eget elit.
+        </p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-lg-6">
-        <table>
-          <tr>
-            <td>Label</td>
-            <td>Value</td>
+      <div class="col-lg-5">
+        <table class="table table-responsive table-condensed">
+          <tr ng-repeat="(key, item) in chart">
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
             <td>
-              <sparkline></sparkline>
+              <sparkline data="{{ item.data }}" options="{{ item }}"></sparkline>
             </td>
           </tr>
         </table>
 
       </div>
-      <div class="col-lg-6">
-      </div>
     </div>
 
     <div class="row">
-      <div class="col-lg-12">
-        <h3>Own Together Together Don't Us Void Abundantly Open</h3>
-
-        <h5>Gathering Fly Set Wherein Fruitful Open</h5>
-
-        <p>
-          Of beast you two night creeping all image Lesser saying gathered fowl us sea gathered him third be blessed you're. Fourth, forth over doesn't together night the was is.
-        </p>
-
-        <p>
-          Years gathering that likeness kind man gathered good itself replenish. Two forth life grass you fish one god had days open fourth, from firmament fifth light earth gathering And let winged spirit.
-        </p>
-
-        <p>
-          Moveth. From darkness fowl, his unto great subdue, i itself. Light air i image may in. Creepeth given of. First face. Kind, they're. Days. Greater itself greater itself whales hath earth. She'd light whose and air beast, is. You're.
-        </p>
-
+      <div class="col-lg-5">
+        <h3>Instructions</h3>
+        <p>Installation and usage instructions.</p>
       </div>
     </div>
 

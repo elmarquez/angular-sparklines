@@ -1,0 +1,18 @@
+/**
+ * Angular Sparklines styles
+ */
+/* line 5, ../sass/sparklines.scss */
+.sparkline {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 10, ../sass/sparklines.scss */
+span.sparkline {
+  display: inline-block;
+  width: 5em;
+  height: 15px;
+  margin: 0 .2em;
+  vertical-align: baseline;
+}

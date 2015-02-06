@@ -1,10 +1,6 @@
 'use strict';
 
 /**
- * Example charting application.
+ * Example application.
  */
-var app = angular.module('metricsgraphics', []);
-
-app.constant('MetricsGraphicsCfg', {
-  a: 'b'
-});
+angular.module('example', [ 'sparklines' ]);

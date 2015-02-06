@@ -4,11 +4,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="initial-scale=1,width=device-width">
-  <title>angular-metrics-graphics</title>
+  <title>angular-sparklines</title>
   <!-- STYLES -->
-  <link rel="stylesheet" type="text/css" href="css/example.css"/>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic"/>
+  
   <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" type="text/css" href="vendor/metrics-graphics/dist/metricsgraphics.css"/>
+  <link rel="stylesheet" type="text/css" href="styles/example.css"/>
+  <link rel="stylesheet" type="text/css" href="styles/sparklines.css"/>
   
   <!-- SCRIPTS -->
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -19,64 +21,83 @@
   <script src="vendor/jquery/dist/jquery.min.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="vendor/d3/d3.min.js"></script>
-  <script src="vendor/metrics-graphics/dist/metricsgraphics.js"></script>
   <script src="vendor/angular/angular.min.js"></script>
   
+  <script src="scripts/directives/sparklines.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/example.js"></script>
-  <script src="scripts/directives/sparklines.js"></script>
   
 </head>
-<body ng-app="metricsgraphics">
+<body ng-app="example">
 
   <div class="container" ng-controller="ExampleCtrl">
+
     <div class="row">
-      <div class="col-lg-12">
-        <h1>Tests for angular-metrics-graphics module</h1>
-        <p>Sample charts from the <a href="http://www.metricsgraphicsjs.org">MetricsGraphics</a> project page.</p>
+      <div class="col-lg-5">
+        <h1>Angular Sparklines</h1>
+        <p>
+          Sparklines are ...
+          Four basic chart types are available: line, bar, area, and heat map.
+          Reference to Tufte, other people's implementations.
+        </p>
+        <p>
+            <code>&lt;sparkline data="{{ data }}" options="{{ options }}"&gt;&lt;/sparkline&gt;</code>
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          vulputate purus non bibendum pharetra. Vestibulum ante ipsum primis
+          in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur
+          facilisis, est at ultricies ornare, nunc orci auctor mi, id auctor
+          nunc ipsum sed purus. Cras sollicitudin ante non elit vehicula, eu
+          ultricies magna condimentum. Ut mi tellus, fermentum quis mauris
+          eget, hendrerit eleifend urna. Nam facilisis, justo et ultricies
+          auctor, urna quam iaculis tortor, sed luctus libero erat vel sapien.
+          Ut sed sem vitae nulla scelerisque finibus non ut dui. Suspendisse
+          ullamcorper ultrices lorem nec vestibulum. Etiam quis interdum
+          velit. Maecenas imperdiet dictum nisl, venenatis vehicula ante
+          efficitur dapibus. Proin sed justo mi. Mauris lacinia hendrerit
+          sapien, ut dictum nisl rhoncus in. Proin libero turpis, posuere ut
+          tristique eu, luctus quis tellus. Nulla nec accumsan ex, non
+          scelerisque metus.
+        </p>
+        <p>
+          Mauris vitae feugiat nibh. Integer at tellus enim. Cras hendrerit a
+          arcu venenatis vestibulum. Sed cursus, est a dapibus malesuada, dolor
+          nunc consequat velit, et pharetra augue ex sed magna. Morbi suscipit
+          sit amet metus a mattis. Donec auctor lorem dui, ut interdum tellus
+          mollis a. Aenean sodales eros magna, a cursus leo pulvinar et. Nullam
+          in metus luctus, feugiat nulla ac, feugiat arcu. Nullam tincidunt
+          placerat nisi, quis tincidunt eros tincidunt quis. Curabitur
+          fermentum mattis porttitor. Nam tristique diam finibus nibh congue,
+          id sollicitudin urna blandit. Donec ante felis, hendrerit ac
+          vulputate nec, suscipit eget elit.
+        </p>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-lg-6">
-        <chart title="{{ chart.title }}"
-               data="{{ chart.data }}"
-               description="{{ chart.description }}"
-               xAccessor="{{ chart.xAccessor }}"
-               yAccessor="{{ chart.yAccessor }}"
-               ng-if="chart.data"></chart>
-      </div>
-      <div class="col-lg-6">
-        <div id="fake_users1"></div>
+      <div class="col-lg-5">
+        <table class="table table-responsive table-condensed">
+          <tr ng-repeat="(key, item) in chart">
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+              <sparkline data="{{ item.data }}" options="{{ item }}"></sparkline>
+            </td>
+          </tr>
+        </table>
+
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-lg-5">
+        <h3>Instructions</h3>
+        <p>Installation and usage instructions.</p>
+      </div>
+    </div>
+
   </div>
-
-<script type="text/javascript">
-  var torso = {};
-  torso.width = 375;
-  torso.height = 200;
-  torso.right = 20;
-
-  $(document).ready(function() {
-    d3.json('data/fake_users1.json', function(data) {
-      data = MG.convert.date(data, 'date');
-      var fake_baselines = [{value: 160000000, label: 'a baseline'}];
-      // add a line chart
-      MG.data_graphic({
-        title: "Line Chart",
-        description: "This is a simple line chart. You can remove the area portion by adding <i>area: false</i> to the arguments list.",
-        data: data,
-        width: torso.width,
-        height: torso.height,
-        right: torso.right,
-        baselines: fake_baselines,
-        target: '#fake_users1',
-        x_accessor: 'date',
-        y_accessor: 'value'
-      });
-    });
-  });
-</script>
 
 </body>
 </html>

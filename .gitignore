@@ -29,4 +29,5 @@ node_modules
 
 # Other
 .idea
+.sass-cache
 *.dist

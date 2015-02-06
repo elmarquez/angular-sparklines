@@ -1,16 +1,21 @@
 {
   "css": [
-    "css/example.css",
-    "vendor/bootstrap/dist/css/bootstrap.min.css"
+    "vendor/bootstrap/dist/css/bootstrap.min.css",
+    "styles/example.css",
+    "styles/sparklines.css"
+  ],
+  "fonts": [
+    "http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic"
   ],
   "js": [
+    "vendor/jquery/dist/jquery.min.js",
     "vendor/bootstrap/dist/js/bootstrap.min.js",
     "vendor/d3/d3.min.js",
     "vendor/angular/angular.min.js"
   ],
   "app": [
+    "scripts/directives/sparklines.js",
     "scripts/app.js",
-    "scripts/controllers/example.js",
-    "scripts/directives/sparklines.js"
+    "scripts/controllers/example.js"
   ]
 }

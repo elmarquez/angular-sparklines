@@ -3,4 +3,4 @@
 /**
  * Example application.
  */
-var app = angular.module('example', []);
+angular.module('example', [ 'sparklines' ]);

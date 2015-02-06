@@ -1,7 +1,12 @@
 module.exports = {
+  css: {
+    src: '<%= yeoman.app %>/styles/sparklines.css',
+    dest: '<%= yeoman.dist %>/angular-sparklines.css',
+    expand: false
+  },
   dist: {
     cwd: '<%= yeoman.app %>/',
-    src: [ '**/*' ],
+    src: [ '**/*', '!sass/**/*' ],
     dest: '<%= yeoman.dist %>/examples',
     expand: true
   },
