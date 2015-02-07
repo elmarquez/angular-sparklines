@@ -1,5 +1,26 @@
 /* line 1, ../sass/example.scss */
 body {
-  background-color: #ffffe9;
+  background-color: #ffffeb;
+  color: #0A0500;
   font-family: 'Crimson Text', 'Times New Roman', serif;
+}
+
+/* line 6, ../sass/example.scss */
+.block {
+  padding-top: 20px;
+}
+
+/* line 9, ../sass/example.scss */
+.footer {
+  padding-bottom: 60px;
+}
+
+/* line 12, ../sass/example.scss */
+.offset-bottom {
+  padding-bottom: 20px;
+}
+
+/* line 15, ../sass/example.scss */
+.offset-top {
+  padding-top: 20px;
 }

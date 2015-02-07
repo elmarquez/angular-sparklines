@@ -1,16 +1,38 @@
 /**
  * Angular Sparklines styles
  */
+$fill-positive: #333;
+$fill-positive-light: #666;
+$fill-negative: #cc2222;
 
-.sparkline {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 span.sparkline {
   display: inline-block;
   width: 5em;
   height: 15px;
   margin: 0 .2em;
   vertical-align: baseline;
+}
+sparkline {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+sparkline path {
+  stroke: #999999;
+  stroke-width: 1;
+  fill: none;
+}
+sparkline path.area {
+  stroke: none;
+  fill: $fill-positive-light;
+}
+sparkline rect.bar {
+  stroke: none;
+  fill: $fill-positive;
+}
+sparkline rect.binary {
+  fill: $fill-positive;
+}
+sparkline rect.negative {
+  fill: $fill-negative;
 }

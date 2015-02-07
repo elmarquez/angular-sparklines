@@ -1,1 +1,1 @@
-.sparkline{box-sizing:border-box;margin:0;padding:0}span.sparkline{display:inline-block;width:5em;height:15px;margin:0 .2em;vertical-align:baseline}
+span.sparkline{display:inline-block;width:5em;height:15px;margin:0 .2em;vertical-align:baseline}sparkline{box-sizing:border-box;margin:0;padding:0}sparkline path{stroke:#999;stroke-width:1;fill:none}sparkline path.area{stroke:none;fill:#666}sparkline rect.bar{stroke:none;fill:#333}sparkline rect.binary{fill:#333}sparkline rect.negative{fill:#c22}

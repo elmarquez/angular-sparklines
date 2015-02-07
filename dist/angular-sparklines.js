@@ -2,11 +2,161 @@
 /* jshint camelcase:false, unused:false */
 'use strict';
 
+// module
+angular.module('sparklines', []);
+
 /**
  * Utility functions.
  */
 angular.module('sparklines').service('SparkUtils', function () {
   var svc = {};
+
+  /**
+   * Create an area chart and add it to the DOM.
+   * @param {String} id Element ID
+   * @param {Array} data Data array
+   * @param {Object} options Chart configuration options
+   */
+  svc.areaChart = function (id, data, options) {
+    // create the d3 SVG element
+    var graph = d3.select(id).append('svg:svg').attr('width', options.width).attr('height', options.height);
+    // X and Y scales
+    var x = d3.time.scale()
+      .domain([0, data.length])
+      .range([0, options.width]);
+    var y = d3.scale.linear()
+      .domain([0, d3.max(data)])
+      .range([options.height, 0]);
+    // create the area shape
+    var area = d3.svg.area()
+      .x(function(d, i) { return x(i); })
+      .y0(options.height)
+      .y1(function(d) { return y(d); });
+    // add the area fill to the graph
+    graph.append('path').datum(data).attr('class', 'area').attr('d', area);
+  };
+
+  /**
+   * Create a bar chart and add it to the DOM.
+   * @param {String} id Element ID
+   * @param {Array} data Data array
+   * @param {Object} options Chart configuration options
+   */
+  svc.barChart = function (id, data, options) {
+    // create the d3 SVG element
+    var graph = d3.select(id).append('svg:svg').attr('width', options.width).attr('height', options.height);
+    // Y scale
+    var yScale = d3.scale.linear()
+        .domain([0, d3.max(data)])
+        .range([0, options.height]);
+    var barWidth = options.width / data.length;
+    var bar = graph.selectAll('g')
+        .data(data)
+        .enter().append('g')
+        .attr('transform', function(d, i) { return 'translate(' + i * barWidth + ',0)'; });
+    bar.append('rect')
+        .attr('class', 'bar')
+        .attr('y', function(d) { return yScale(d); })
+        .attr('height', function(d) { return options.height - yScale(d); })
+        .attr('width', barWidth - 1);
+  };
+
+  /**
+   * Create a bar chart and add it to the DOM.
+   * @param {String} id Element ID
+   * @param {Array} data Data array
+   * @param {Object} options Chart configuration options
+   */
+  svc.binaryChart = function (id, data, options) {
+    // create the d3 SVG element
+    var graph = d3.select(id).append('svg:svg').attr('width', options.width).attr('height', options.height);
+    // Y scale
+    var yScale = d3.scale.linear()
+        .domain([0, 1])
+        .range([0, options.height]);
+    var barWidth = options.width / data.length;
+    var bar = graph.selectAll('g')
+        .data(data)
+        .enter().append('g')
+        .attr('transform', function(d, i) { return 'translate(' + i * barWidth + ',0)'; });
+    bar.append('rect')
+        .attr('class', function (d) { return d ? 'binary' : 'binary negative'; })
+        .attr('y', function(d) { return d ? 0 : yScale(0.5); })
+        .attr('height', function() { return options.height / 2; })
+        .attr('width', barWidth - 1);
+  };
+
+  /**
+   * Default chart configuration.
+   */
+  svc.defaultOptions = {
+    animate: false,
+    dimensionUnit: 'px',
+    height: 15,
+    interpolation: 'basis', // basis, linear
+    transitionDelay: 1000,
+    type: 'line',
+    updateDelay: 1000,
+    width: 100
+  };
+
+  svc.heatChart = function (id, data, options, shape) {
+
+  };
+
+  /**
+   * Create a line chart and add it to the DOM.
+   * @param {String} id Element ID
+   * @param {Array} data Data array
+   * @param {Object} options Chart configuration options
+   */
+  svc.lineChart = function (id, data, options) {
+    // create the d3 SVG element
+    var graph = d3.select(id).append('svg:svg').attr('width', options.width).attr('height', options.height);
+    // X and Y scales
+    var xScale = d3.scale.linear().domain([0, data.length]).range([0, options.width]);
+    var yMax = d3.max(data);
+    var yMin = d3.min(data);
+    var yScale = d3.scale.linear().domain([yMin, yMax]).range([0, options.height]);
+    var line = d3.svg.line()
+        .x(function(d, i) {
+          // verbose logging to show what's actually being done
+          //console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+          // return the X coordinate where we want to plot this datapoint
+          return xScale(i);
+        })
+        .y(function(d) {
+          // verbose logging to show what's actually being done
+          //console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + ' using our yScale.');
+          // return the Y coordinate where we want to plot this datapoint
+          return yScale(d);
+        });
+    graph.append('svg:path').attr('d', line(data));
+  };
+
+  /**
+   * Merge by reference from source to destination object. Overwrites existing
+   * keys.
+   * @param dest Destination object
+   * @param src Source object
+   * @returns {Object} Merged object
+   */
+  svc.mergeOptions = function (dest, src) {
+    Object.keys(src).forEach(function(key) {
+      dest[key] = src[key];
+    });
+    return dest;
+  };
+
+  svc.randomNumbers = function (count, max) {
+    var i, val, vals = [];
+    max = max || 100;
+    for (i = 0; i < count; i++) {
+      val = Math.floor(Math.random() * max);
+      vals.push(val);
+    }
+    return vals;
+  };
 
   svc.randomString = function (len) {
     var charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -15,117 +165,48 @@ angular.module('sparklines').service('SparkUtils', function () {
       var randomPoz = Math.floor(Math.random() * charSet.length);
       s += charSet.substring(randomPoz, randomPoz + 1);
     }
-    return 'as-' + s;
+    return s;
   };
 
   return svc;
 });
 
 /**
- * Easy sparklines for Angular.
- *
- * TODO
- * supported types: line, dot, bar, area
+ * Line graph.
  * options: height, width, colors, stroke, fill, min, max
- *
- * Lots of help from:
- *
- * @see http://bl.ocks.org/benjchristensen/1148374
  * @see http://prag.ma/code/sparky/
+ * @see http://bl.ocks.org/benjchristensen/1133472
+ * @see http://bl.ocks.org/benjchristensen/1148374
  */
-angular.module('sparklines').directive('sparkline', ['SparkUtils', function(Utils) {
+angular.module('sparklines').directive('sparkline', ['SparkUtils', function(Sparklines) {
   return {
-    restrict: 'AE',
+    restrict: 'E',
     scope: {
       data: '=',
       options: '='
     },
     link: function (scope, element) {
-      // data array
-      var data = scope.data || [3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 9];
+      var data, id, options;
       // chart element identifier
-      var id = element[0].id = element[0].id ? element[0].id : Utils.randomString(5);
-      // chart options
-      var options = scope.options || {
-            animate: true,
-            height: '100%',
-            interpolation: 'basis', // basis, linear
-            transitionDelay: 1000,
-            updateDelay: 1000,
-            width: '100%'
-          };
-      // create an SVG element inside the #graph div that fills 100% of the div
-      var graph = d3.select(id).append('svg:svg').attr('width', options.width).attr('height', options.height);
-      // X scale will fit values from 0-10 within pixels 0-100
-      var x = d3.scale.linear().domain([0, 48]).range([-5, options.width]); // starting point is -5 so the first value doesn't show and slides off the edge as part of the transition
-      // Y scale will fit values from 0-10 within pixels 0-100
-      var y = d3.scale.linear().domain([0, 10]).range([0, options.height]);
-      // create a line object that represents the SVN line we're creating
-      var line = d3.svg.line()
-        // assign the X function to plot our line as we wish
-          .x(function (d, i) {
-            // verbose logging to show what's actually being done
-            // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
-            // return the X coordinate where we want to plot this datapoint
-            return x(i);
-          })
-          .y(function (d) {
-            // verbose logging to show what's actually being done
-            // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + ' using our yScale.');
-            // return the Y coordinate where we want to plot this datapoint
-            return y(d);
-          })
-          .interpolate(options.interpolation);
-      // display the line by appending an svg:path element with the data line we created above
-      graph.append('svg:path').attr('d', line(data));
-      // or it can be done like this
-      //graph.selectAll('path').data([data]).enter().append('svg:path').attr('d', line);
-      function redrawWithAnimation() {
-        // update with animation
-        graph.selectAll('path')
-            .data([data]) // set the new data
-            .attr('transform', 'translate(' + x(1) + ')') // set the transform to the right by x(1) pixels (6 for the scale we've set) to hide the new value
-            .attr('d', line) // apply the new data values ... but the new value is hidden at this point off the right of the canvas
-            .transition() // start a transition to bring the new value into view
-            .ease('linear')
-            .duration(options.transitionDelay) // for this demo we want a continual slide so set this to the same as the setInterval amount below
-            .attr('transform', 'translate(' + x(0) + ')'); // animate a slide to the left back to x(0) pixels to reveal the new value
-
-        /* thanks to 'barrym' for examples of transform: https://gist.github.com/1137131 */
+      element[0].id = element[0].id ? element[0].id : 'sparkline-' + Sparklines.randomString(5);
+      id = '#' + element[0].id;
+      // chart data and configuration options
+      data = scope.test ? Sparklines.randomNumbers(20, 100) : scope.data || [];
+      options = scope.options ? Sparklines.mergeOptions(Sparklines.defaultOptions, scope.options) : Sparklines.defaultOptions;
+      // build the chart
+      if (options.type === 'area') {
+        Sparklines.areaChart(id, data, options);
+      } else if (options.type === 'bar') {
+        Sparklines.barChart(id, data, options);
+      } else if (options.type === 'binary') {
+        Sparklines.binaryChart(id, data, options);
+      } else if (options.type === 'heatCircle') {
+        Sparklines.heatChart(id, data, options, 'circle');
+      } else if (options.type === 'heatRect') {
+        Sparklines.heatChart(id, data, options, 'rect');
+      } else if (options.type === 'line') {
+        Sparklines.lineChart(id, data, options);
       }
-
-      function redrawWithoutAnimation() {
-        // static update without animation
-        graph.selectAll('path')
-            .data([data]) // set the new data
-            .attr('d', line); // apply the new data values
-      }
-
-      setInterval(function () {
-        var v = data.shift(); // remove the first element of the array
-        data.push(v); // add a new element to the array (we're just taking the number we just shifted off the front and appending to the end)
-        if (options.animate) {
-          redrawWithAnimation();
-        } else {
-          redrawWithoutAnimation();
-        }
-      }, options.updateDelay);
     }
   };
 }]);
-
-angular.module('sparklines').directive('barChart', function () {
-
-});
-
-angular.module('sparklines').directive('heatCircle', function () {
-
-});
-
-angular.module('sparklines').directive('heatRectangle', function () {
-
-});
-
-angular.module('sparklines').directive('pieChart', function () {
-
-});

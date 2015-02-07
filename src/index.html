@@ -24,73 +24,100 @@
 <body ng-app="example">
 
   <div class="container" ng-controller="ExampleCtrl">
-
     <div class="row">
-      <div class="col-lg-5">
-        <h1>Angular Sparklines</h1>
-        <p>
-          Sparklines are ...
-          Four basic chart types are available: line, bar, area, and heat map.
-          Reference to Tufte, other people's implementations.
-        </p>
-        <p>
-            <code>&lt;sparkline data="{{ data }}" options="{{ options }}"&gt;&lt;/sparkline&gt;</code>
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-          vulputate purus non bibendum pharetra. Vestibulum ante ipsum primis
-          in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur
-          facilisis, est at ultricies ornare, nunc orci auctor mi, id auctor
-          nunc ipsum sed purus. Cras sollicitudin ante non elit vehicula, eu
-          ultricies magna condimentum. Ut mi tellus, fermentum quis mauris
-          eget, hendrerit eleifend urna. Nam facilisis, justo et ultricies
-          auctor, urna quam iaculis tortor, sed luctus libero erat vel sapien.
-          Ut sed sem vitae nulla scelerisque finibus non ut dui. Suspendisse
-          ullamcorper ultrices lorem nec vestibulum. Etiam quis interdum
-          velit. Maecenas imperdiet dictum nisl, venenatis vehicula ante
-          efficitur dapibus. Proin sed justo mi. Mauris lacinia hendrerit
-          sapien, ut dictum nisl rhoncus in. Proin libero turpis, posuere ut
-          tristique eu, luctus quis tellus. Nulla nec accumsan ex, non
-          scelerisque metus.
-        </p>
-        <p>
-          Mauris vitae feugiat nibh. Integer at tellus enim. Cras hendrerit a
-          arcu venenatis vestibulum. Sed cursus, est a dapibus malesuada, dolor
-          nunc consequat velit, et pharetra augue ex sed magna. Morbi suscipit
-          sit amet metus a mattis. Donec auctor lorem dui, ut interdum tellus
-          mollis a. Aenean sodales eros magna, a cursus leo pulvinar et. Nullam
-          in metus luctus, feugiat nulla ac, feugiat arcu. Nullam tincidunt
-          placerat nisi, quis tincidunt eros tincidunt quis. Curabitur
-          fermentum mattis porttitor. Nam tristique diam finibus nibh congue,
-          id sollicitudin urna blandit. Donec ante felis, hendrerit ac
-          vulputate nec, suscipit eget elit.
-        </p>
+      <div class="col-lg-5 col-md-6 col-sm-8">
+
+        <div class="block">
+          <h1>Angular Sparklines</h1>
+        </div>
+
+        <div class="block">
+          <p>
+            Sparklines are ...
+            Four basic chart types are available: line, bar, area, and heat map.
+            Reference to Tufte, other people's implementations.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+            vulputate purus non bibendum pharetra. Vestibulum ante ipsum primis
+            in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur
+            facilisis, est at ultricies ornare, nunc orci auctor mi, id auctor
+            nunc ipsum sed purus. Cras sollicitudin ante non elit vehicula, eu
+            ultricies magna condimentum. Ut mi tellus, fermentum quis mauris
+            eget, hendrerit eleifend urna.
+          </p>
+        </div>
+
+        <div class="block">
+          <table class="table table-responsive table-condensed">
+            <tr ng-repeat="(key, item) in chart">
+              <td>{{ item.title }} <span ng-if="item.description">- {{ item.description }}</span></td>
+              <td>
+                <sparkline data="item.data" options="item"></sparkline>
+              </td>
+            </tr>
+          </table>
+
+          <h3>Instructions</h3>
+          <p>
+            Use Bower to automatically install the library and its dependencies in your project:
+          </p>
+
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-lg-5">
-        <table class="table table-responsive table-condensed">
-          <tr ng-repeat="(key, item) in chart">
-            <td>{{ item.title }}</td>
-            <td>{{ item.description }}</td>
-            <td>
-              <sparkline data="{{ item.data }}" options="{{ item }}"></sparkline>
-            </td>
-          </tr>
-        </table>
-
+      <div class="col-lg-12">
+        <code>bower install -S angular-sparklines</code>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-lg-5">
-        <h3>Instructions</h3>
-        <p>Installation and usage instructions.</p>
+      <div class="col-lg-5 col-md-6 col-sm-8">
+        <div class="block">
+          <p>
+            In your HTML, add a reference to the angular-sparklines library and associated
+            JavaScript and CSS dependencies:
+          </p>
+          <p>
+        </div>
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-lg-12">
+        <code>
+&lt;link type="text/css" rel="stylesheet" href="path/to/angular-sparklines/dist/angular-sparklines.css" media="all"&gt;<br/>
+&lt;script type="text/javascript" src="path/to/d3/d3.min.js"&gt;&lt;/script&gt;<br/>
+&lt;script type="text/javascript" src="path/to/angular/angular.min.js"&gt;&lt;/script&gt;<br/>
+&lt;script type="text/javascript" src="path/to/angular-sparklines/dist/angular-sparklines.js"&gt;&lt;/script&gt;
+        </code>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-5 col-md-6 col-sm-8">
+        <div class="block">
+          <p>
+            Create a sparkline and set the data source as the `data` variable from the
+            controller scope. Set the configuration options from the variable `options`
+            in the controller scope:
+          </p>
+          <p>
+<pre>&lt;sparkline data="{{ data }}" options="{{ options }}"&gt;&lt;/sparkline&gt;</pre>
+          </p>
+
+        </div>
+
+        <div class="block footer">
+          Copyright &copy; 2015 Davis Marques
+        </div>
+
+      </div>
+    </div>
   </div>
+
+  <!-- github fork me corner banner -->
+  <a href="https://github.com/elmarquez/angular-sparklines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
 </body>
 </html>
