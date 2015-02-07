@@ -49,26 +49,9 @@ in the controller scope:
 
     <sparkline data="{{ data }}" options="{{ options }}"></sparkline>
 
-Use a test dataset to evaluate the sparkline while designing.
-
-    <sparkline test="true"></sparkline>
-
 
 License
 -------
 
 Please see the LICENSE file for licensing and copyright information.
 
-
-Backlog
--------
-
-Sparklines
-    static and animated
-    standard deviation
-    line, bar, area, binary
-Heat Circles
-Heat Rectangles
-
-* http://prag.ma/code/sparky/
-* https://blog.safaribooksonline.com/2014/02/12/inline-visualization-d3-js/
