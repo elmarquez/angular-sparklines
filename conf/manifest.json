@@ -5,7 +5,7 @@
     "styles/sparklines.css"
   ],
   "fonts": [
-    "http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic"
+    "http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic"
   ],
   "js": [
     "vendor/jquery/dist/jquery.min.js",
@@ -16,6 +16,7 @@
   "app": [
     "scripts/directives/sparklines.js",
     "scripts/app.js",
-    "scripts/controllers/example.js"
+    "scripts/controllers/example.js",
+    "scripts/filters/array.js"
   ]
 }

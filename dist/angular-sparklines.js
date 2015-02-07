@@ -100,10 +100,6 @@ angular.module('sparklines').service('SparkUtils', function () {
     width: 100
   };
 
-  svc.heatChart = function (id, data, options, shape) {
-
-  };
-
   /**
    * Create a line chart and add it to the DOM.
    * @param {String} id Element ID
@@ -200,10 +196,6 @@ angular.module('sparklines').directive('sparkline', ['SparkUtils', function(Spar
         Sparklines.barChart(id, data, options);
       } else if (options.type === 'binary') {
         Sparklines.binaryChart(id, data, options);
-      } else if (options.type === 'heatCircle') {
-        Sparklines.heatChart(id, data, options, 'circle');
-      } else if (options.type === 'heatRect') {
-        Sparklines.heatChart(id, data, options, 'rect');
       } else if (options.type === 'line') {
         Sparklines.lineChart(id, data, options);
       }

@@ -3,24 +3,56 @@ body {
   background-color: #ffffeb;
   color: #0A0500;
   font-family: 'Crimson Text', 'Times New Roman', serif;
+  font-size: 16px;
 }
 
-/* line 6, ../sass/example.scss */
-.block {
-  padding-top: 20px;
+/* line 7, ../sass/example.scss */
+sparkline {
+  width: 100px;
 }
 
-/* line 9, ../sass/example.scss */
+/* line 10, ../sass/example.scss */
+.caps {
+  text-transform: uppercase;
+}
+
+/* line 13, ../sass/example.scss */
+.chart-description {
+  padding-left: 10px;
+  width: 100px;
+}
+
+/* line 17, ../sass/example.scss */
+.chart-last-value {
+  color: red;
+  padding-left: 5px;
+  width: 30px;
+}
+
+/* line 22, ../sass/example.scss */
+.code {
+  background: white;
+  color: #666;
+  font-family: monospace;
+  font-size: 11px;
+  margin-bottom: 10px;
+  padding: 10px;
+  padding-left: 20px;
+}
+
+/* line 31, ../sass/example.scss */
 .footer {
+  font-style: italic;
   padding-bottom: 60px;
 }
 
-/* line 12, ../sass/example.scss */
-.offset-bottom {
-  padding-bottom: 20px;
+/* line 35, ../sass/example.scss */
+.offset {
+  padding-top: 20px;
 }
 
-/* line 15, ../sass/example.scss */
-.offset-top {
-  padding-top: 20px;
+/* line 38, ../sass/example.scss */
+.quote {
+  font-style: italic;
+  margin-top: 20px;
 }

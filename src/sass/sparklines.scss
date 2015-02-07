@@ -3,7 +3,10 @@
  */
 $fill-positive: #333;
 $fill-positive-light: #666;
-$fill-negative: #cc2222;
+$fill-negative: red;
+
+$binary-positive: $fill-positive;
+$binary-negative: $fill-positive;
 
 span.sparkline {
   display: inline-block;
@@ -31,8 +34,8 @@ sparkline rect.bar {
   fill: $fill-positive;
 }
 sparkline rect.binary {
-  fill: $fill-positive;
+  fill: $binary-positive;
 }
 sparkline rect.negative {
-  fill: $fill-negative;
+  fill: $binary-negative;
 }

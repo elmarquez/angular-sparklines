@@ -21,7 +21,7 @@ angular
     $scope.chart = {
       area: {
         data: $scope.data,
-        description: 'Description forthcoming',
+        description: 'Volume',
         height: 20,
         title: 'Area Chart',
         type: 'area',
@@ -29,7 +29,7 @@ angular
       },
       bar: {
         data: $scope.data,
-        description: 'Description forthcoming',
+        description: 'Price',
         height: 20,
         title: 'Bar Chart',
         type: 'bar',
@@ -42,42 +42,18 @@ angular
           false, false, false, true, true,
           true, false, true, true, true
         ],
-        description: 'Description forthcoming',
+        description: 'Active',
         title: 'Binary Chart',
         type: 'binary',
         height: 20,
         width: 100
       },
-      heatCircle: {
-        data: $scope.data,
-        description: 'Description forthcoming',
-        title: 'Heat Circles',
-        type: 'heatCircle',
-        height: 20,
-        width: 100
-      },
-      heatSquare: {
-        data: $scope.data,
-        description: 'Description forthcoming',
-        title: 'Heat Squares',
-        type: 'heatSquare',
-        height: 20,
-        width: 100
-      },
       line: {
         data: $scope.data,
-        description: 'Description forthcoming',
+        description: 'Time',
         height: 20,
         title: 'Line Graph',
         type: 'line',
-        width: 100
-      },
-      stackedBar: {
-        data: { a: 24, b: 34, c: 29, d: 24, e: 20, f: 31 },
-        description: 'Description forthcoming',
-        height: 20,
-        title: 'Stacked Bar Chart',
-        type: 'stackedBar',
         width: 100
       }
     };

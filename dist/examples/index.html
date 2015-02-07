@@ -6,7 +6,7 @@
   <meta name="viewport" content="initial-scale=1,width=device-width">
   <title>angular-sparklines</title>
   <!-- STYLES -->
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic"/>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic"/>
   
   <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="styles/example.css"/>
@@ -26,6 +26,7 @@
   <script src="scripts/directives/sparklines.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/example.js"></script>
+  <script src="scripts/filters/array.js"></script>
   
 </head>
 <body ng-app="example">
@@ -34,89 +35,53 @@
     <div class="row">
       <div class="col-lg-5 col-md-6 col-sm-8">
 
-        <div class="block">
+        <div class="offset">
           <h1>Angular Sparklines</h1>
-        </div>
-
-        <div class="block">
-          <p>
-            Sparklines are ...
-            Four basic chart types are available: line, bar, area, and heat map.
-            Reference to Tufte, other people's implementations.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-            vulputate purus non bibendum pharetra. Vestibulum ante ipsum primis
-            in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur
-            facilisis, est at ultricies ornare, nunc orci auctor mi, id auctor
-            nunc ipsum sed purus. Cras sollicitudin ante non elit vehicula, eu
-            ultricies magna condimentum. Ut mi tellus, fermentum quis mauris
-            eget, hendrerit eleifend urna.
+          <p class="quote">
+            "A sparkline is a small intense, simple, word-sized graphic with
+            typographic resolution. Sparklines mean that graphics are no longer
+            cartoonish special occasions with captions and boxes, but rather
+            sparkline graphic can be everywhere a word or number can be:
+            embedded in a sentence, table, headline, map, spreadsheet, graphic."
+            &mdash;
+            <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">Edward Tufte</a>
           </p>
         </div>
 
-        <div class="block">
-          <table class="table table-responsive table-condensed">
+        <div class="offset">
+          <p>
+            <span class="caps">angular-sparklines</span> makes it trivial to add sparklines to your
+            web page. The following table provides an example of the four basic
+            types of sparkline that are available in the library:
+          </p>
+          <br/>
+          <table class="table table-condensed">
             <tr ng-repeat="(key, item) in chart">
-              <td>{{ item.title }} <span ng-if="item.description">- {{ item.description }}</span></td>
+              <td>{{ item.title }}</td>
               <td>
-                <sparkline data="item.data" options="item"></sparkline>
+                <div class="pull-right">
+                  <sparkline data="item.data" options="item"></sparkline>
+                </div>
+              </td>
+              <td>
+                  <span class="chart-description">{{ item.description }}</span>
+                  <span class="chart-last-value">{{ item.data | last }}</span>
               </td>
             </tr>
           </table>
-
-          <h3>Instructions</h3>
           <p>
-            Use Bower to automatically install the library and its dependencies in your project:
+            Use Bower to automatically install the library and its
+            dependencies in your project.
           </p>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12">
-        <code>bower install -S angular-sparklines</code>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-5 col-md-6 col-sm-8">
-        <div class="block">
+          <div class="code">bower install -S angular-sparklines</div>
           <p>
-            In your HTML, add a reference to the angular-sparklines library and associated
-            JavaScript and CSS dependencies:
+            Refer to the README.md document for instructions on how to create
+            and customize sparklines. Examples are available from the repository.
           </p>
-          <p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12">
-        <code>
-&lt;link type="text/css" rel="stylesheet" href="path/to/angular-sparklines/dist/angular-sparklines.css" media="all"&gt;<br/>
-&lt;script type="text/javascript" src="path/to/d3/d3.min.js"&gt;&lt;/script&gt;<br/>
-&lt;script type="text/javascript" src="path/to/angular/angular.min.js"&gt;&lt;/script&gt;<br/>
-&lt;script type="text/javascript" src="path/to/angular-sparklines/dist/angular-sparklines.js"&gt;&lt;/script&gt;
-        </code>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-5 col-md-6 col-sm-8">
-        <div class="block">
-          <p>
-            Create a sparkline and set the data source as the `data` variable from the
-            controller scope. Set the configuration options from the variable `options`
-            in the controller scope:
-          </p>
-          <p>
-<pre>&lt;sparkline data="{{ data }}" options="{{ options }}"&gt;&lt;/sparkline&gt;</pre>
-          </p>
-
         </div>
 
-        <div class="block footer">
-          Copyright &copy; 2015 Davis Marques
+        <div class="offset footer">
+          Copyright &copy; 2015 Davis Marques.
         </div>
 
       </div>
