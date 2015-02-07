@@ -14,7 +14,7 @@
     ".travis.yml",
     "package.json",
     "conf",
-    "dist/examples/**/*",
+    "dist/examples",
     "node_modules",
     "src",
     "test",
