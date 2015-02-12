@@ -51,7 +51,11 @@ angular
       line: {
         data: $scope.data,
         description: 'Time',
+        endValue: true,
         height: 20,
+        maxValue: true,
+        minValue: true,
+        startValue: true,
         title: 'Line Graph',
         type: 'line',
         width: 100

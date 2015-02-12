@@ -110,6 +110,7 @@ angular.module('sparklines').service('SparkUtils', function () {
     // create the d3 SVG element
     var graph = d3.select(id).append('svg:svg').attr('width', options.width).attr('height', options.height);
     // X and Y scales
+    // FIXME adjust chart height, width to accommodate dots at perimeter
     var xScale = d3.scale.linear().domain([0, data.length]).range([0, options.width]);
     var yMax = d3.max(data);
     var yMin = d3.min(data);
@@ -128,6 +129,58 @@ angular.module('sparklines').service('SparkUtils', function () {
           return yScale(d);
         });
     graph.append('svg:path').attr('d', line(data));
+
+    var dotHeight = 4;
+    var dotWidth = 4;
+    var dot = graph.selectAll('g')
+      .data(data)
+      .enter().append('g')
+      .attr('transform', function(d, i) { return 'translate(' + (xScale(i) - (dotWidth / 2)) + ',' + (-dotHeight/2) + ')'; });
+
+    if (options.endValue) {
+      dot.append('rect')
+        .attr('class', function (d, i) { return i === (data.length - 1) ? 'dot last' : 'hidden'; })
+        .attr('y', function(d) { return yScale(d); })
+        .attr('height', dotHeight)
+        .attr('width', dotWidth);
+    }
+    if (options.startValue) {
+      dot.append('rect')
+        .attr('class', function (d, i) { return i === 0 ? 'dot first' : 'hidden'; })
+        .attr('y', function(d) { return yScale(d); })
+        .attr('height', dotHeight)
+        .attr('width', dotWidth);
+    }
+    if (options.maxValue) {
+      var maxValueIndex = data.reduce(function(lastIndex, current, index) {
+        if (data[index] >= data[lastIndex]) {
+          return index;
+        } else {
+          return lastIndex;
+        }
+      }, 0);
+      console.dir('max ' + maxValueIndex);
+      dot.append('rect')
+        .attr('class', function (d, i) { return i === maxValueIndex ? 'dot max' : 'hidden'; })
+        .attr('y', function(d) { return yScale(d); })
+        .attr('height', dotHeight)
+        .attr('width', dotWidth);
+    }
+    if (options.minValue) {
+      var minValueIndex = data.reduce(function(lastIndex, current, index) {
+        if (data[index] < data[lastIndex]) {
+          return index;
+        } else {
+          return lastIndex;
+        }
+      }, Infinity);
+      console.dir('min ' + minValueIndex);
+      dot.append('rect')
+        .attr('class', function (d, i) { return i === minValueIndex ? 'dot min' : 'hidden'; })
+        .attr('y', function(d) { return yScale(d); })
+        .attr('height', dotHeight)
+        .attr('width', dotWidth);
+    }
   };
 
   /**

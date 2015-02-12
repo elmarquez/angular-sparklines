@@ -3,10 +3,15 @@
  */
 $fill-positive: #333;
 $fill-positive-light: #666;
-$fill-negative: red;
+$fill-negative: #FF3333;
 
 $binary-positive: $fill-positive;
-$binary-negative: $fill-positive;
+$binary-negative: $fill-negative;
+
+$dot-first-value-fill: #FF3333;
+$dot-max-value-fill: #33CCFF;
+$dot-min-value-fill: #33CCFF;
+$dot-last-value-fill: #FF3333;
 
 span.sparkline {
   display: inline-block;
@@ -36,6 +41,23 @@ sparkline rect.bar {
 sparkline rect.binary {
   fill: $binary-positive;
 }
+sparkline rect.dot {
+}
+sparkline rect.first {
+  fill: $dot-first-value-fill;
+}
+sparkline rect.last {
+  fill: $dot-last-value-fill;
+}
+sparkline rect.max {
+  fill: $dot-max-value-fill;
+}
+sparkline rect.min {
+  fill: $dot-min-value-fill;
+}
 sparkline rect.negative {
   fill: $binary-negative;
+}
+sparkline .hidden {
+  display: none;
 }
